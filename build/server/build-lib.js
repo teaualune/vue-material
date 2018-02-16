@@ -2,14 +2,13 @@ import ora from 'ora';
 import chalk from 'chalk';
 import webpack from 'webpack';
 import webpackConfig from '../webpack/prod-lib';
-import webpackDebugConfig from '../webpack/debug-lib';
 
 const spinner = ora(chalk.cyan('Building library'));
 
 process.stdout.write('\n');
 spinner.start();
 
-webpack([webpackConfig, webpackDebugConfig], (error, stats) => {
+webpack(webpackConfig, (error, stats) => {
   if (error) {
     spinner.fail(chalk.red('Something wrong happened:\n'));
 

@@ -6,7 +6,7 @@
     </md-step-header>
     <div class="md-step-content" v-if="!vertical || (vertical && isCurrentStep)">
       <slot></slot>
-      <div class="md-step-actions" v-if="!vertical || (vertical && isCurrentStep)">
+      <div class="md-step-actions" v-if="(!vertical || (vertical && isCurrentStep)) && mdShowActions">
         <md-button class="md-raised md-primary" @click="moveNextStep" :disabled="!mdContinue">{{ continueText }}</md-button>
         <md-button @click="movePreviousStep" :disabled="!canGoBack">{{ mdButtonBack }}</md-button>
       </div>
@@ -52,6 +52,10 @@
       mdTooltipDirection: {
         type: String,
         default: 'bottom'
+      },
+      mdShowActions: {
+        type: Boolean,
+        default: true
       }
     },
     data() {

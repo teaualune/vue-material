@@ -3,7 +3,7 @@
     <md-whiteframe md-tag="nav" class="md-steps-navigation" v-if="!mdVertical" :md-elevation="mdElevation" :class="navigationClasses" ref="stepNavigation">
       <md-step-header-container :md-vertical="mdVertical" ref="stepHeader">
         <md-step-header
-          v-for="(step, index) in stepList"
+          v-for="step in stepList"
           :key="step.id"
           :step="step"
           :md-alternate-labels="mdAlternateLabels"
