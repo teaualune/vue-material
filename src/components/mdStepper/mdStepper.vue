@@ -7,7 +7,7 @@
           :key="step.id"
           :step="step"
           :md-alternate-labels="mdAlternateLabels"
-          @click.native="setActiveStep(step)">
+          @click.native="setActiveStepFromHeader(step)">
         </md-step-header>
       </md-step-header-container>
     </md-whiteframe>
@@ -46,6 +46,10 @@
         default: 1
       },
       mdVertical: {
+        type: Boolean,
+        default: false
+      },
+      mdDisableHeaderNav: {
         type: Boolean,
         default: false
       }
@@ -124,7 +128,12 @@
           this.setActiveStep(prevStep);
         }
       },
-      setActiveStep(stepData) {
+      setActiveStepFromHeader(stepData) {
+        if (!this.mdDisableHeaderNav) {
+          this.setActiveStep(stepData);
+        }
+      },
+      setActiveStep(stepData, skipEvent) {
         if (this.activeStepNumber > this.getStepIndex(stepData.id) && !stepData.editable) {
           return;
         }
@@ -132,7 +141,9 @@
         this.activeStep = stepData.id;
         this.activeStepNumber = this.getStepIndex(this.activeStep);
         this.calculatePosition();
-        this.$emit('change', this.activeStepNumber);
+        if (!skipEvent) {
+          this.$emit('change', this.activeStepNumber);
+        }
       },
       unregisterStep(stepData) {
         this.$delete(this.stepList, stepData.id);
