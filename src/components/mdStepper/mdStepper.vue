@@ -99,6 +99,12 @@
 
         return previousStep;
       },
+      getStepByIndex(index) {
+        if (index < 0 || index >= this.getStepsCount()) {
+          return null;
+        }
+        return this.stepList[Object.keys(this.stepList)[index]];
+      },
       getStepsCount() {
         const idList = Object.keys(this.stepList);
 
